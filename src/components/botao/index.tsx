@@ -5,7 +5,7 @@ import style from './Botao.module.scss';
 class Botao extends React.Component { // botao extendido do componente react
   render() {
     return (<button className={style.botao}>
-      Botão
+      {this.props.children}
     </button>)
   }
 }

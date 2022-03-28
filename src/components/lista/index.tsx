@@ -1,4 +1,5 @@
 import React from 'react';
+import Item from './Item';
 import style from './Lista.module.scss';
 
 function Lista() {
@@ -17,10 +18,10 @@ function Lista() {
       <h2>Estudos do dia</h2>
       <ul className={style.listaTarefas}>
         {tarefas.map((item, index) => (
-          <li key={index} className={style.item}>
-            <h3>{item.tarefa}</h3>
-            <span>{item.tempo}</span>
-          </li>
+          <Item
+          key={index}
+            {...item} // usa todos os atributos dentro do objeto como props para esse componenente, se tiver muitas propriedades da um spread e mostra tudo(cuidado para usar com api)
+          />
         ))}
       </ul>
     </aside>

@@ -2,9 +2,12 @@ import React from 'react';
 import style from './Botao.module.scss';
 
 
-class Botao extends React.Component { // botao extendido do componente react
+class Botao extends React.Component<{
+  type?: "button" | "submit" | "reset" | undefined
+}> { // botao extendido do componente react
   render() {
-    return (<button className={style.botao}>
+    const { type = "button" } = this.props;
+    return (<button type={type} className={style.botao}>
       {this.props.children}
     </button>)
   }

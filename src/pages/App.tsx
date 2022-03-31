@@ -12,20 +12,37 @@ function App() {
   function selecionaTarefa(tarefaSelecionada: ITarefa) {
     setSelecionado(tarefaSelecionada),
       setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => ({
-         ...tarefa, selecionado:
-          tarefa.id === tarefaSelecionada.id ? true : false})))
+        ...tarefa, selecionado:
+          tarefa.id === tarefaSelecionada.id ? true : false
+      })))
   }
   // funcao dentro do react e coloca um valor padrao dentro dele
-  return (
-    <div className={style.AppStyle}>
-      <Formulario setTarefas={setTarefas} />
-      <Cronometro />
-      <Lista
-        tarefas={tarefas}
-        selecionaTarefa={selecionaTarefa}
-      />
-    </div>
-  );
-}
 
-export default App;
+  function finalizarTarefa() {
+    if (selecionado) {
+      setSelecionado(undefined);
+      setTarefas(tarefasAnteriores => tarefasAnteriores.map(tarefa => {
+        if (tarefa.id === selecionado.id) {
+          return {
+            ...tarefa, selecionado: false, completado: true
+          }
+        }
+        return tarefa;
+      }))
+    }
+  }
+
+    return (
+      <div className={style.AppStyle}>
+        <Formulario setTarefas={setTarefas} />
+        <Cronometro selecionado={selecionado}
+          finalizarTarefa={finalizarTarefa} />
+        <Lista
+          tarefas={tarefas}
+          selecionaTarefa={selecionaTarefa}
+
+        />
+      </div>
+    );
+  }
+  export default App;
